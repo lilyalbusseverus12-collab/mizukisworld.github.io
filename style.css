@@ -1909,3 +1909,125 @@ body::after {
     }
 
 }
+
+/* =========================
+   🌙 DARK MODE
+========================= */
+
+.theme-button {
+    border: none;
+    background: transparent;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    padding: 5px 8px;
+
+    transition: 0.3s ease;
+}
+
+.theme-button:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+
+/* DARK THEME */
+
+body.dark-mode {
+    background: #17121c;
+    color: #f5dce9;
+}
+
+body.dark-mode nav {
+    background: rgba(23, 18, 28, 0.95);
+    border-bottom-color: rgba(232, 139, 181, 0.2);
+}
+
+body.dark-mode nav a {
+    color: #f1c6dc;
+}
+
+body.dark-mode nav a:hover {
+    color: #f09ac0;
+}
+
+body.dark-mode .hero {
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #4b2748 0%,
+            #2d1c32 45%,
+            #17121c 80%
+        );
+}
+
+body.dark-mode .hero h1 {
+    background:
+        linear-gradient(
+            90deg,
+            #f7d8e8,
+            #e88bb5
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .hero p {
+    color: #d7b8c8;
+}
+
+body.dark-mode .section h2 {
+    color: #e88bb5;
+}
+
+body.dark-mode .about {
+    background: #251b2a;
+    border-color: #513047;
+}
+
+body.dark-mode .about-text h3 {
+    color: #e88bb5;
+}
+
+body.dark-mode .about-text p {
+    color: #d2b4c4;
+}
+
+body.dark-mode .card {
+    background: #251b2a;
+    border-color: #513047;
+}
+
+body.dark-mode .card h3 {
+    color: #e88bb5;
+}
+
+body.dark-mode .card p {
+    color: #c9aaba;
+}
+
+body.dark-mode #fandoms .fandom-card {
+    background: #211822;
+    border-color: #513047;
+}
+
+body.dark-mode #contact > p {
+    color: #d2b4c4;
+}
+
+body.dark-mode .socials a {
+    background: #251b2a;
+    border-color: #513047;
+    color: #f1c6dc;
+}
+
+body.dark-mode footer {
+    background: #211822;
+    color: #b99aaa;
+}
+
+body.dark-mode .floating-decoration {
+    color: #f09ac0;
+}
