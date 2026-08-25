@@ -104,20 +104,15 @@ if (music && musicButton) {
 
             music.play()
                 .then(function () {
-
                     musicButton.textContent = "❚❚";
-
                 })
-                .catch(function () {
-
-                    console.log("Music could not be played.");
-
+                .catch(function (error) {
+                    console.log("Music could not be played:", error);
                 });
 
         } else {
 
             music.pause();
-
             musicButton.textContent = "▶";
 
         }
@@ -143,17 +138,13 @@ const decorations = [
 
 function createDecoration() {
 
-    const decoration =
-        document.createElement("div");
+    const decoration = document.createElement("div");
 
-    decoration.className =
-        "floating-decoration";
+    decoration.className = "floating-decoration";
 
     decoration.textContent =
         decorations[
-            Math.floor(
-                Math.random() * decorations.length
-            )
+            Math.floor(Math.random() * decorations.length)
         ];
 
     decoration.style.left =
@@ -172,8 +163,5 @@ function createDecoration() {
     }, 14000);
 
 }
-
-
-/* Create a new heart/star every 700ms */
 
 setInterval(createDecoration, 700);
