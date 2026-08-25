@@ -1,8 +1,9 @@
-// ===============================
-// LOADING SCREEN
-// ===============================
+/* =========================
+   🌸 LOADING SCREEN
+========================= */
 
 window.addEventListener("load", function () {
+
     const loadingScreen = document.getElementById("loading-screen");
 
     if (loadingScreen) {
@@ -10,41 +11,27 @@ window.addEventListener("load", function () {
             loadingScreen.classList.add("hide");
         }, 800);
     }
+
 });
 
 
-// ===============================
-// SMOOTH SCROLL
-// ===============================
-
-document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-    link.addEventListener("click", function (event) {
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: "smooth"
-            });
-        }
-    });
-});
-
-
-// ===============================
-// SCROLL REVEAL
-// ===============================
+/* =========================
+   ✨ SECTION ANIMATION
+========================= */
 
 const sections = document.querySelectorAll(".section");
 
 const observer = new IntersectionObserver(
     function (entries) {
+
         entries.forEach(function (entry) {
+
             if (entry.isIntersecting) {
                 entry.target.classList.add("show");
             }
+
         });
+
     },
     {
         threshold: 0.15
@@ -56,50 +43,137 @@ sections.forEach(function (section) {
 });
 
 
-// ===============================
-// GALLERY LIGHTBOX
-// ===============================
+/* =========================
+   🖼️ GALLERY LIGHTBOX
+========================= */
 
 const galleryImages = document.querySelectorAll(".gallery img");
 
 galleryImages.forEach(function (image) {
+
     image.addEventListener("click", function () {
 
         const lightbox = document.createElement("div");
-        lightbox.classList.add("lightbox");
 
-        const content = document.createElement("div");
-        content.classList.add("lightbox-content");
+        lightbox.className = "lightbox";
 
-        const largeImage = document.createElement("img");
-        largeImage.src = image.src;
-        largeImage.alt = image.alt;
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
 
-        const closeButton = document.createElement("button");
-        closeButton.classList.add("lightbox-close");
-        closeButton.innerHTML = "✕";
+                <button class="lightbox-close">×</button>
 
-        content.appendChild(largeImage);
-        content.appendChild(closeButton);
-        lightbox.appendChild(content);
+                <img src="${image.src}" alt="${image.alt}">
+
+            </div>
+        `;
 
         document.body.appendChild(lightbox);
+
+        const closeButton =
+            lightbox.querySelector(".lightbox-close");
 
         closeButton.addEventListener("click", function () {
             lightbox.remove();
         });
 
         lightbox.addEventListener("click", function (event) {
+
             if (event.target === lightbox) {
                 lightbox.remove();
             }
+
         });
 
-        document.addEventListener("keydown", function escapeHandler(event) {
-            if (event.key === "Escape") {
-                lightbox.remove();
-                document.removeEventListener("keydown", escapeHandler);
-            }
-        });
     });
+
 });
+
+
+/* =========================
+   🎵 MUSIC PLAYER
+========================= */
+
+const music = document.getElementById("background-music");
+const musicButton = document.getElementById("music-toggle");
+
+if (music && musicButton) {
+
+    musicButton.addEventListener("click", function () {
+
+        if (music.paused) {
+
+            music.play()
+                .then(function () {
+
+                    musicButton.textContent = "❚❚";
+
+                })
+                .catch(function () {
+
+                    console.log("Music could not be played.");
+
+                });
+
+        } else {
+
+            music.pause();
+
+            musicButton.textContent = "▶";
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   💕 FLOATING HEARTS & STARS
+========================= */
+
+const decorations = [
+    "♡",
+    "♥",
+    "✦",
+    "✧",
+    "⋆",
+    "˚",
+    "♡"
+];
+
+function createDecoration() {
+
+    const decoration =
+        document.createElement("div");
+
+    decoration.className =
+        "floating-decoration";
+
+    decoration.textContent =
+        decorations[
+            Math.floor(
+                Math.random() * decorations.length
+            )
+        ];
+
+    decoration.style.left =
+        Math.random() * 100 + "vw";
+
+    decoration.style.fontSize =
+        (12 + Math.random() * 18) + "px";
+
+    decoration.style.animationDuration =
+        (6 + Math.random() * 7) + "s";
+
+    document.body.appendChild(decoration);
+
+    setTimeout(function () {
+        decoration.remove();
+    }, 14000);
+
+}
+
+
+/* Create a new heart/star every 700ms */
+
+setInterval(createDecoration, 700);
