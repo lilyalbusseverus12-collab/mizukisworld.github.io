@@ -17,6 +17,27 @@ const observer = new IntersectionObserver(
     }
 );
 
+function createFloatingElement() {
+  const items = ['🌸', '✨', '💖', '⭐', '🎀'];
+  const element = document.createElement('div');
+  
+  element.classList.add('floating-element');
+  element.textContent = items[Math.floor(Math.random() * items.length)];
+  
+  // Rastgele yatay pozisyon, boyut ve animasyon süresi
+  element.style.left = Math.random() * 100 + 'vw';
+  element.style.fontSize = (Math.random() * 15 + 15) + 'px';
+  element.style.animationDuration = (Math.random() * 3 + 4) + 's';
+
+  document.body.appendChild(element);
+
+  setTimeout(() => {
+    element.remove();
+  }, 7000);
+}
+
+// Her 400 milisaniyede bir yeni bir kalp/yıldız oluştur
+setInterval(createFloatingElement, 400);
 
 sections.forEach((section) => {
     observer.observe(section);
