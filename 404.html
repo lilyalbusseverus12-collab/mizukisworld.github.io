@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Oops! 🌸 | Mizuki's World</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="favicon.png">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    #efb3d0,
+                    #f3c4da 45%,
+                    #f8d6e6 80%
+                );
+
+            color: #713d57;
+        }
+
+        .error {
+            padding: 40px;
+        }
+
+        .error-symbol {
+            font-size: 80px;
+            margin-bottom: 15px;
+
+            animation: float 2s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 80px;
+            color: #c9578a;
+
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #ad4d79;
+
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #815069;
+
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 13px 28px;
+
+            border-radius: 30px;
+
+            background: #d96a9d;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s ease;
+        }
+
+        .button:hover {
+            background: #c9578a;
+
+            transform: translateY(-4px);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="error">
+
+        <div class="error-symbol">
+            🌸
+        </div>
+
+        <h1>404</h1>
+
+        <h2>Oops! This page got lost.</h2>
+
+        <p>
+            Looks like you wandered somewhere
+            that doesn't exist in my world.
+        </p>
+
+        <a href="index.html" class="button">
+            ← Go Back Home
+        </a>
+
+    </div>
+
+</body>
+
+</html>
