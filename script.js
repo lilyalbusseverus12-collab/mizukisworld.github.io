@@ -1,104 +1,36 @@
+// =========================
+// 1. İNTERSECTION OBSERVER (Sayfa Kaydırma Efekti)
+// =========================
 const sections = document.querySelectorAll(".section");
 
 const observer = new IntersectionObserver(
     (entries) => {
-
         entries.forEach((entry) => {
-
             if (entry.isIntersecting) {
                 entry.target.classList.add("show");
             }
-
         });
-
     },
     {
         threshold: 0.15
     }
 );
 
-function createFloatingElement() {
-  const items = ['🌸', '✨', '💖', '⭐', '🎀'];
-  const element = document.createElement('div');
-  
-  element.classList.add('floating-element');
-  element.textContent = items[Math.floor(Math.random() * items.length)];
-  
-  // Rastgele yatay pozisyon, boyut ve animasyon süresi
-  element.style.left = Math.random() * 100 + 'vw';
-  element.style.fontSize = (Math.random() * 15 + 15) + 'px';
-  element.style.animationDuration = (Math.random() * 3 + 4) + 's';
-
-  document.body.appendChild(element);
-
-  setTimeout(() => {
-    element.remove();
-  }, 7000);
-}
-
-// Her 400 milisaniyede bir yeni bir kalp/yıldız oluştur
-setInterval(createFloatingElement, 400);
-
 sections.forEach((section) => {
     observer.observe(section);
 });
 
-/* =========================
-   GALLERY LIGHTBOX
-========================= */
-
-const galleryImages = document.querySelectorAll(".gallery img");
-
-galleryImages.forEach((image) => {
-
-    image.addEventListener("click", () => {
-
-        const lightbox = document.createElement("div");
-
-        lightbox.classList.add("lightbox");
-
-        lightbox.innerHTML = `
-            <div class="lightbox-content">
-                <button class="lightbox-close">&times;</button>
-                <img src="${image.src}" alt="${image.alt}">
-            </div>
-        `;
-
-        document.body.appendChild(lightbox);
-
-        lightbox.addEventListener("click", (event) => {
-
-            if (
-                event.target === lightbox ||
-                event.target.classList.contains("lightbox-close")
-            ) {
-                lightbox.remove();
-            }
-
-        });
-
-    });
-
-});
-
-window.addEventListener("load", () => {
-
-    const loadingScreen =
-        document.getElementById("loading-screen");
-
-    setTimeout(() => {
-
-        loadingScreen.classList.add("hide");
-
-    }, 800);
-
-});
-
-// script.js dosyasının içeriği:
-
+// =========================
+// 2. MÜZİK ÇALAR KONTROLÜ
+// =========================
 function toggleMusic() {
   const music = document.getElementById("bgMusic");
   const btn = document.getElementById("musicToggle");
+
+  if (!music || !btn) {
+    console.error("Müzik elementi veya buton HTML'de bulunamadı!");
+    return;
+  }
 
   if (music.paused) {
     music.play();
@@ -109,6 +41,9 @@ function toggleMusic() {
   }
 }
 
+// =========================
+// 3. YÜZEN PEMBE KALPLER VE YILDIZLAR
+// =========================
 function createFloatingElement() {
   const items = ['🌸', '✨', '💖', '⭐', '🎀'];
   const element = document.createElement('div');
@@ -128,3 +63,30 @@ function createFloatingElement() {
 }
 
 setInterval(createFloatingElement, 400);
+
+// =========================
+// 4. GALLERY LIGHTBOX (Fotoğraf Büyütme)
+// =========================
+const galleryImages = document.querySelectorAll(".gallery img");
+
+galleryImages.forEach((image) => {
+    image.addEventListener("click", () => {
+        const lightbox = document.createElement("div");
+        lightbox.classList.add("lightbox");
+
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
+                <img src="${image.src}" alt="${image.alt}">
+                <span class="close-btn">&times;</span>
+            </div>
+        `;
+
+        document.body.appendChild(lightbox);
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target.classList.contains("lightbox") || e.target.classList.contains("close-btn")) {
+                lightbox.remove();
+            }
+        });
+    });
+});
