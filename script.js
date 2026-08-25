@@ -93,3 +93,38 @@ window.addEventListener("load", () => {
     }, 800);
 
 });
+
+// script.js dosyasının içeriği:
+
+function toggleMusic() {
+  const music = document.getElementById("bgMusic");
+  const btn = document.getElementById("musicToggle");
+
+  if (music.paused) {
+    music.play();
+    btn.textContent = "⏸️ Müziği Durdur";
+  } else {
+    music.pause();
+    btn.textContent = "🎵 Müziği Aç";
+  }
+}
+
+function createFloatingElement() {
+  const items = ['🌸', '✨', '💖', '⭐', '🎀'];
+  const element = document.createElement('div');
+  
+  element.classList.add('floating-element');
+  element.textContent = items[Math.floor(Math.random() * items.length)];
+  
+  element.style.left = Math.random() * 100 + 'vw';
+  element.style.fontSize = (Math.random() * 15 + 15) + 'px';
+  element.style.animationDuration = (Math.random() * 3 + 4) + 's';
+
+  document.body.appendChild(element);
+
+  setTimeout(() => {
+    element.remove();
+  }, 7000);
+}
+
+setInterval(createFloatingElement, 400);
