@@ -1,5 +1,18 @@
 // =========================
-// 1. İNTERSECTION OBSERVER (Sayfa Kaydırma Efekti)
+// 1. PRELOADER / LOADING SCREEN FIX
+// =========================
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader") || document.querySelector("#loading") || document.querySelector(".preloader");
+  if (loader) {
+    loader.style.opacity = "0";
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 500);
+  }
+});
+
+// =========================
+// 2. INTERSECTION OBSERVER (Scroll Effect)
 // =========================
 const sections = document.querySelectorAll(".section");
 
@@ -21,28 +34,28 @@ sections.forEach((section) => {
 });
 
 // =========================
-// 2. MÜZİK ÇALAR KONTROLÜ
+// 3. BACKGROUND MUSIC CONTROL
 // =========================
 function toggleMusic() {
   const music = document.getElementById("bgMusic");
   const btn = document.getElementById("musicToggle");
 
-  if (!music || !btn) {
-    console.error("Müzik elementi veya buton HTML'de bulunamadı!");
-    return;
-  }
+  if (!music || !btn) return;
 
   if (music.paused) {
-    music.play();
-    btn.textContent = "⏸️ Müziği Durdur";
+    music.play().then(() => {
+      btn.textContent = "⏸️ Pause Music";
+    }).catch(error => {
+      console.log("Music play error:", error);
+    });
   } else {
     music.pause();
-    btn.textContent = "🎵 Müziği Aç";
+    btn.textContent = "🎵 Play Music";
   }
 }
 
 // =========================
-// 3. YÜZEN PEMBE KALPLER VE YILDIZLAR
+// 4. FLOATING PINK HEARTS & STARS
 // =========================
 function createFloatingElement() {
   const items = ['🌸', '✨', '💖', '⭐', '🎀'];
@@ -65,7 +78,7 @@ function createFloatingElement() {
 setInterval(createFloatingElement, 400);
 
 // =========================
-// 4. GALLERY LIGHTBOX (Fotoğraf Büyütme)
+// 5. GALLERY LIGHTBOX
 // =========================
 const galleryImages = document.querySelectorAll(".gallery img");
 
