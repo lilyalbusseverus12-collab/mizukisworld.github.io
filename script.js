@@ -165,3 +165,29 @@ function createDecoration() {
 }
 
 setInterval(createDecoration, 700);
+
+/* =========================
+   🌙 DARK MODE
+========================= */
+
+const themeButton = document.getElementById("theme-toggle");
+
+if (themeButton) {
+
+    themeButton.addEventListener("click", function () {
+
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+
+            themeButton.textContent = "☀️";
+
+        } else {
+
+            themeButton.textContent = "🌙";
+
+        }
+
+    });
+
+}
