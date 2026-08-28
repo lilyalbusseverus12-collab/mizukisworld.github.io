@@ -7,9 +7,11 @@ window.addEventListener("load", function () {
     const loadingScreen = document.getElementById("loading-screen");
 
     if (loadingScreen) {
+
         setTimeout(function () {
             loadingScreen.classList.add("hide");
         }, 800);
+
     }
 
 });
@@ -19,85 +21,134 @@ window.addEventListener("load", function () {
    ✨ SECTION ANIMATION
 ========================= */
 
-const sections = document.querySelectorAll(".section");
+document.addEventListener("DOMContentLoaded", function () {
 
-if ("IntersectionObserver" in window) {
+    const sections = document.querySelectorAll(".section");
 
-    const observer = new IntersectionObserver(
-        function (entries) {
+    if ("IntersectionObserver" in window) {
 
-            entries.forEach(function (entry) {
+        const observer = new IntersectionObserver(
+            function (entries) {
 
-                if (entry.isIntersecting) {
+                entries.forEach(function (entry) {
 
-                    entry.target.classList.add("show");
+                    if (entry.isIntersecting) {
 
-                    observer.unobserve(entry.target);
-                }
+                        entry.target.classList.add("show");
 
-            });
+                        observer.unobserve(entry.target);
 
-        },
-        {
-            threshold: 0.15
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.05
+            }
+        );
+
+
+        sections.forEach(function (section) {
+            observer.observe(section);
+        });
+
+
+        /*
+           Fandom bölümünün kesinlikle görünür
+           kalmasını sağlıyoruz.
+        */
+
+        const fandomSection =
+            document.getElementById("fandoms");
+
+        if (fandomSection) {
+
+            fandomSection.classList.add("show");
+
         }
-    );
 
-    sections.forEach(function (section) {
-        observer.observe(section);
-    });
+    } else {
 
-} else {
+        sections.forEach(function (section) {
+            section.classList.add("show");
+        });
 
-    sections.forEach(function (section) {
-        section.classList.add("show");
-    });
+    }
 
-}
+});
 
 
 /* =========================
    🖼️ GALLERY LIGHTBOX
 ========================= */
 
-const galleryImages = document.querySelectorAll(".gallery img");
+const galleryImages =
+    document.querySelectorAll(".gallery img");
+
 
 galleryImages.forEach(function (image) {
 
     image.addEventListener("click", function () {
 
-        const lightbox = document.createElement("div");
+        const lightbox =
+            document.createElement("div");
 
         lightbox.className = "lightbox";
+
 
         lightbox.innerHTML = `
             <div class="lightbox-content">
 
-                <button class="lightbox-close" aria-label="Close">
+                <button
+                    class="lightbox-close"
+                    aria-label="Close"
+                >
                     ×
                 </button>
 
-                <img src="${image.src}" alt="${image.alt}">
+                <img
+                    src="${image.src}"
+                    alt="${image.alt}"
+                >
 
             </div>
         `;
 
+
         document.body.appendChild(lightbox);
+
 
         const closeButton =
             lightbox.querySelector(".lightbox-close");
 
-        closeButton.addEventListener("click", function () {
-            lightbox.remove();
-        });
 
-        lightbox.addEventListener("click", function (event) {
+        if (closeButton) {
 
-            if (event.target === lightbox) {
-                lightbox.remove();
+            closeButton.addEventListener(
+                "click",
+                function () {
+
+                    lightbox.remove();
+
+                }
+            );
+
+        }
+
+
+        lightbox.addEventListener(
+            "click",
+            function (event) {
+
+                if (event.target === lightbox) {
+
+                    lightbox.remove();
+
+                }
+
             }
-
-        });
+        );
 
     });
 
@@ -108,75 +159,114 @@ galleryImages.forEach(function (image) {
    🎵 MUSIC PLAYER
 ========================= */
 
-const music = document.getElementById("background-music");
-const musicButton = document.getElementById("music-toggle");
-const progressBar = document.getElementById("music-progress");
+const music =
+    document.getElementById("background-music");
+
+const musicButton =
+    document.getElementById("music-toggle");
+
+const progressBar =
+    document.getElementById("music-progress");
+
 
 if (music && musicButton) {
 
-    musicButton.addEventListener("click", function () {
+    musicButton.addEventListener(
+        "click",
+        function () {
 
-        if (music.paused) {
+            if (music.paused) {
 
-            music.play()
-                .then(function () {
+                music.play()
+                    .then(function () {
 
-                    musicButton.textContent = "❚❚";
+                        musicButton.textContent = "❚❚";
 
-                })
-                .catch(function (error) {
+                    })
+                    .catch(function (error) {
 
-                    console.log("Music error:", error);
+                        console.log(
+                            "Music error:",
+                            error
+                        );
 
-                });
+                    });
 
-        } else {
+            } else {
 
-            music.pause();
+                music.pause();
+
+                musicButton.textContent = "▶";
+
+            }
+
+        }
+    );
+
+
+    music.addEventListener(
+        "play",
+        function () {
+
+            musicButton.textContent = "❚❚";
+
+        }
+    );
+
+
+    music.addEventListener(
+        "pause",
+        function () {
 
             musicButton.textContent = "▶";
 
         }
-
-    });
-
-
-    music.addEventListener("play", function () {
-        musicButton.textContent = "❚❚";
-    });
-
-
-    music.addEventListener("pause", function () {
-        musicButton.textContent = "▶";
-    });
+    );
 
 
     /* MUSIC PROGRESS */
 
     if (progressBar) {
 
-        music.addEventListener("timeupdate", function () {
+        music.addEventListener(
+            "timeupdate",
+            function () {
 
-            if (music.duration) {
+                if (
+                    music.duration &&
+                    !isNaN(music.duration)
+                ) {
 
-                progressBar.value =
-                    (music.currentTime / music.duration) * 100;
+                    progressBar.value =
+                        (
+                            music.currentTime /
+                            music.duration
+                        ) * 100;
 
-            }
-
-        });
-
-
-        progressBar.addEventListener("input", function () {
-
-            if (music.duration) {
-
-                music.currentTime =
-                    (progressBar.value / 100) * music.duration;
+                }
 
             }
+        );
 
-        });
+
+        progressBar.addEventListener(
+            "input",
+            function () {
+
+                if (
+                    music.duration &&
+                    !isNaN(music.duration)
+                ) {
+
+                    music.currentTime =
+                        (
+                            progressBar.value / 100
+                        ) * music.duration;
+
+                }
+
+            }
+        );
 
     }
 
@@ -196,33 +286,48 @@ const decorations = [
     "˚"
 ];
 
+
 function createDecoration() {
 
-    const decoration = document.createElement("div");
+    const decoration =
+        document.createElement("div");
 
-    decoration.className = "floating-decoration";
+    decoration.className =
+        "floating-decoration";
+
 
     decoration.textContent =
         decorations[
-            Math.floor(Math.random() * decorations.length)
+            Math.floor(
+                Math.random() *
+                decorations.length
+            )
         ];
+
 
     decoration.style.left =
         Math.random() * 100 + "vw";
 
+
     decoration.style.fontSize =
         (12 + Math.random() * 18) + "px";
+
 
     decoration.style.animationDuration =
         (6 + Math.random() * 7) + "s";
 
+
     document.body.appendChild(decoration);
 
+
     setTimeout(function () {
+
         decoration.remove();
+
     }, 14000);
 
 }
+
 
 setInterval(createDecoration, 700);
 
@@ -234,25 +339,34 @@ setInterval(createDecoration, 700);
 const themeButton =
     document.getElementById("theme-toggle");
 
+
 if (themeButton) {
 
-    themeButton.addEventListener("click", function () {
+    themeButton.addEventListener(
+        "click",
+        function () {
 
-        document.body.classList.toggle("dark-mode");
+            document.body.classList.toggle(
+                "dark-mode"
+            );
 
-        if (
-            document.body.classList.contains("dark-mode")
-        ) {
 
-            themeButton.textContent = "☀️";
+            if (
+                document.body.classList.contains(
+                    "dark-mode"
+                )
+            ) {
 
-        } else {
+                themeButton.textContent = "☀️";
 
-            themeButton.textContent = "🌙";
+            } else {
+
+                themeButton.textContent = "🌙";
+
+            }
 
         }
-
-    });
+    );
 
 }
 
@@ -270,42 +384,63 @@ const sisterSecret =
 const closeSecret =
     document.getElementById("close-secret");
 
+
 let secretClicks = 0;
+
 
 if (secretTrigger && sisterSecret) {
 
-    secretTrigger.addEventListener("click", function () {
+    secretTrigger.addEventListener(
+        "click",
+        function () {
 
-        secretClicks++;
+            secretClicks++;
 
-        console.log(
-            "Secret clicks:",
-            secretClicks
-        );
 
-        if (secretClicks >= 16) {
+            console.log(
+                "Secret clicks:",
+                secretClicks
+            );
 
-            document.body.classList.add("sister-mode");
 
-            sisterSecret.classList.add("show");
+            if (secretClicks >= 16) {
 
-            secretClicks = 0;
+                document.body.classList.add(
+                    "sister-mode"
+                );
+
+
+                sisterSecret.classList.add(
+                    "show"
+                );
+
+
+                secretClicks = 0;
+
+            }
 
         }
-
-    });
+    );
 
 }
 
 
 if (closeSecret && sisterSecret) {
 
-    closeSecret.addEventListener("click", function () {
+    closeSecret.addEventListener(
+        "click",
+        function () {
 
-        sisterSecret.classList.remove("show");
+            sisterSecret.classList.remove(
+                "show"
+            );
 
-        document.body.classList.remove("sister-mode");
 
-    });
+            document.body.classList.remove(
+                "sister-mode"
+            );
+
+        }
+    );
 
 }
