@@ -779,25 +779,47 @@
 </footer>
 
     ```html
-    <!-- MUSIC PLAYER -->
-    <div class="music-player">
+   ```html
+<!-- 🎵 MUSIC PLAYER -->
 
-        <div class="music-info">
-            <span class="music-icon">🎵</span>
+<div class="music-player">
 
-            <div>
-                <strong>My Little World</strong>
-                <small>♪ Playing my favorite song</small>
-            </div>
+    <div class="music-info">
+
+        <div class="music-icon">🎵</div>
+
+        <div class="music-text">
+            <strong>My Little World</strong>
+            <small>♪ Playing my favorite song</small>
         </div>
+
+    </div>
+
+    <div class="music-controls">
+
+        <button id="music-back">↶</button>
 
         <button id="music-toggle">▶</button>
 
-        <audio id="background-music" loop>
-            <source src="vibehorn-background-music-496933.mp3" type="audio/mpeg">
-        </audio>
+        <button id="music-forward">↷</button>
 
     </div>
+
+    <input
+        type="range"
+        id="music-progress"
+        min="0"
+        max="100"
+        value="0"
+    >
+
+    <audio id="background-music" loop>
+        <source src="vibehorn-background-music-496933.mp3" type="audio/mpeg">
+    </audio>
+
+</div>
+
+  </div>
 
 
     <!-- SECRET SISTER SURPRISE -->
