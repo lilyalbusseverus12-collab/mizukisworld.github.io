@@ -2031,3 +2031,223 @@ body.dark-mode footer {
 body.dark-mode .floating-decoration {
     color: #f09ac0;
 }
+
+/* =========================
+   💛 SECRET SISTER SURPRISE
+========================= */
+
+#secret-trigger {
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s ease;
+}
+
+#secret-trigger:hover {
+    color: #d96a9d;
+    transform: scale(1.05);
+}
+
+
+/* SECRET YELLOW MODE */
+
+body.sister-mode {
+    background: #fff4c7;
+    color: #765b3a;
+}
+
+body.sister-mode nav {
+    background: rgba(255, 244, 199, 0.95);
+    border-bottom-color: #efd98c;
+}
+
+body.sister-mode nav a {
+    color: #8f7040;
+}
+
+body.sister-mode .hero {
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #ffe9a8 0%,
+            #fff0bd 45%,
+            #fff4c7 80%
+        );
+}
+
+body.sister-mode .section h2 {
+    color: #c79b45;
+}
+
+body.sister-mode footer {
+    background: #f7df9e;
+    color: #8f7040;
+}
+
+
+/* SECRET SCREEN */
+
+#sister-secret {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fff9dc 0%,
+            #fff1b8 55%,
+            #f9dfa0 100%
+        );
+
+    overflow-y: auto;
+}
+
+#sister-secret.show {
+    display: flex;
+
+    animation: secretAppear 0.8s ease;
+}
+
+.sister-secret-content {
+    position: relative;
+
+    width: min(700px, 95%);
+
+    padding: 40px;
+
+    text-align: center;
+
+    background: rgba(255, 250, 225, 0.92);
+
+    border: 2px solid #efc979;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 20px 60px rgba(190, 145, 55, 0.25);
+}
+
+.secret-symbol {
+    font-size: 45px;
+
+    color: #e7b84f;
+
+    animation: secretSpin 4s linear infinite;
+}
+
+.sister-secret-content h2 {
+    margin: 10px 0 25px;
+
+    color: #c58e32;
+
+    font-size: 32px;
+}
+
+.sister-secret-content img {
+    display: block;
+
+    width: min(500px, 100%);
+
+    max-height: 500px;
+
+    object-fit: cover;
+
+    margin: 0 auto 25px;
+
+    border-radius: 22px;
+
+    border: 5px solid #fff9df;
+
+    box-shadow:
+        0 10px 30px rgba(160, 115, 35, 0.2);
+}
+
+.sister-secret-content h3 {
+    color: #c58e32;
+
+    font-size: 25px;
+
+    margin-bottom: 15px;
+}
+
+.sister-secret-content p {
+    color: #80663d;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    margin-bottom: 8px;
+}
+
+.secret-close {
+    position: absolute;
+
+    top: 15px;
+    right: 20px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #b88b3b;
+
+    font-size: 32px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.secret-close:hover {
+    transform: scale(1.2) rotate(10deg);
+
+    color: #d96a9d;
+}
+
+@keyframes secretAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+@keyframes secretSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .sister-secret-content {
+        padding: 30px 20px;
+    }
+
+    .sister-secret-content h2 {
+        font-size: 25px;
+    }
+
+}
