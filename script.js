@@ -1,34 +1,45 @@
-```javascript
 /* =========================
-   🌸 LOADING SCREEN
+🌸 LOADING SCREEN
 ========================= */
 
 window.addEventListener("load", function () {
 
-    const loadingScreen = document.getElementById("loading-screen");
+```
+const loadingScreen = document.getElementById("loading-screen");
 
-    if (loadingScreen) {
-        setTimeout(function () {
-            loadingScreen.classList.add("hide");
-        }, 800);
-    }
+if (loadingScreen) {
+
+    setTimeout(function () {
+
+        loadingScreen.classList.add("hide");
+
+    }, 800);
+
+}
+```
 
 });
 
-
 /* =========================
-   ✨ SECTION ANIMATION
+✨ SECTION ANIMATION
 ========================= */
 
 const sections = document.querySelectorAll(".section");
 
+if ("IntersectionObserver" in window) {
+
+```
 const observer = new IntersectionObserver(
     function (entries) {
 
         entries.forEach(function (entry) {
 
             if (entry.isIntersecting) {
+
                 entry.target.classList.add("show");
+
+                observer.unobserve(entry.target);
+
             }
 
         });
@@ -40,217 +51,206 @@ const observer = new IntersectionObserver(
 );
 
 sections.forEach(function (section) {
-    observer.observe(section);
-});
 
+    observer.observe(section);
+
+});
+```
+
+} else {
+
+```
+sections.forEach(function (section) {
+
+    section.classList.add("show");
+
+});
+```
+
+}
 
 /* =========================
-   🖼️ GALLERY LIGHTBOX
+🖼️ GALLERY LIGHTBOX
 ========================= */
 
 const galleryImages = document.querySelectorAll(".gallery img");
 
 galleryImages.forEach(function (image) {
 
-    image.addEventListener("click", function () {
+```
+image.addEventListener("click", function () {
 
-        const lightbox = document.createElement("div");
+    const lightbox = document.createElement("div");
 
-        lightbox.className = "lightbox";
+    lightbox.className = "lightbox";
 
-        lightbox.innerHTML = `
-            <div class="lightbox-content">
+    lightbox.innerHTML = `
+        <div class="lightbox-content">
 
-                <button class="lightbox-close">×</button>
+            <button class="lightbox-close">×</button>
 
-                <img src="${image.src}" alt="${image.alt}">
+            <img src="${image.src}" alt="${image.alt}">
 
-            </div>
-        `;
+        </div>
+    `;
 
-        document.body.appendChild(lightbox);
+    document.body.appendChild(lightbox);
 
-        const closeButton =
-            lightbox.querySelector(".lightbox-close");
+    const closeButton =
+        lightbox.querySelector(".lightbox-close");
 
-        closeButton.addEventListener("click", function () {
-            lightbox.remove();
-        });
+    closeButton.addEventListener("click", function () {
 
-        lightbox.addEventListener("click", function (event) {
-
-            if (event.target === lightbox) {
-                lightbox.remove();
-            }
-
-        });
+        lightbox.remove();
 
     });
 
-});
+    lightbox.addEventListener("click", function (event) {
 
+        if (event.target === lightbox) {
 
-/* =========================
-   🎵 MUSIC PLAYER
-========================= */
-
-const music = document.getElementById("background-music");
-const musicButton = document.getElementById("music-toggle");
-const musicProgress = document.getElementById("music-progress");
-
-if (music && musicButton) {
-
-    /* PLAY / PAUSE */
-
-    musicButton.addEventListener("click", function () {
-
-        if (music.paused) {
-
-            music.play()
-                .then(function () {
-
-                    musicButton.textContent = "❚❚";
-
-                })
-                .catch(function (error) {
-
-                    console.log("MUSIC ERROR:", error);
-
-                });
-
-        } else {
-
-            music.pause();
-
-            musicButton.textContent = "▶";
+            lightbox.remove();
 
         }
 
     });
 
+});
+```
 
-    /* WHEN MUSIC STARTS */
+});
 
-    music.addEventListener("play", function () {
-        musicButton.textContent = "❚❚";
-    });
+/* =========================
+🎵 MUSIC PLAYER
+========================= */
 
+const music = document.getElementById("background-music");
+const musicButton = document.getElementById("music-toggle");
 
-    /* WHEN MUSIC PAUSES */
+if (music && musicButton) {
 
-    music.addEventListener("pause", function () {
+```
+musicButton.addEventListener("click", function () {
+
+    if (music.paused) {
+
+        music.play()
+            .then(function () {
+
+                musicButton.textContent = "❚❚";
+
+            })
+            .catch(function (error) {
+
+                console.log("MUSIC ERROR:", error);
+
+            });
+
+    } else {
+
+        music.pause();
+
         musicButton.textContent = "▶";
-    });
-
-
-    /* UPDATE PROGRESS BAR */
-
-    if (musicProgress) {
-
-        music.addEventListener("timeupdate", function () {
-
-            if (music.duration) {
-
-                musicProgress.value =
-                    (music.currentTime / music.duration) * 100;
-
-            }
-
-        });
-
-
-        /* CLICK PROGRESS BAR */
-
-        musicProgress.addEventListener("input", function () {
-
-            if (music.duration) {
-
-                music.currentTime =
-                    (musicProgress.value / 100) * music.duration;
-
-            }
-
-        });
 
     }
 
+});
+
+
+music.addEventListener("play", function () {
+
+    musicButton.textContent = "❚❚";
+
+});
+
+
+music.addEventListener("pause", function () {
+
+    musicButton.textContent = "▶";
+
+});
+```
+
 }
 
-
 /* =========================
-   💕 FLOATING HEARTS & STARS
+💕 FLOATING HEARTS & STARS
 ========================= */
 
 const decorations = [
-    "♡",
-    "♥",
-    "✦",
-    "✧",
-    "⋆",
-    "˚",
-    "♡"
+"♡",
+"♥",
+"✦",
+"✧",
+"⋆",
+"˚",
+"♡"
 ];
 
 function createDecoration() {
 
-    const decoration = document.createElement("div");
+```
+const decoration = document.createElement("div");
 
-    decoration.className = "floating-decoration";
+decoration.className = "floating-decoration";
 
-    decoration.textContent =
-        decorations[
-            Math.floor(Math.random() * decorations.length)
-        ];
+decoration.textContent =
+    decorations[
+        Math.floor(Math.random() * decorations.length)
+    ];
 
-    decoration.style.left =
-        Math.random() * 100 + "vw";
+decoration.style.left =
+    Math.random() * 100 + "vw";
 
-    decoration.style.fontSize =
-        (12 + Math.random() * 18) + "px";
+decoration.style.fontSize =
+    (12 + Math.random() * 18) + "px";
 
-    decoration.style.animationDuration =
-        (6 + Math.random() * 7) + "s";
+decoration.style.animationDuration =
+    (6 + Math.random() * 7) + "s";
 
-    document.body.appendChild(decoration);
+document.body.appendChild(decoration);
 
-    setTimeout(function () {
-        decoration.remove();
-    }, 14000);
+setTimeout(function () {
+
+    decoration.remove();
+
+}, 14000);
+```
 
 }
 
 setInterval(createDecoration, 700);
 
-
 /* =========================
-   🌙 DARK MODE
+🌙 DARK MODE
 ========================= */
 
 const themeButton = document.getElementById("theme-toggle");
 
 if (themeButton) {
 
-    themeButton.addEventListener("click", function () {
+```
+themeButton.addEventListener("click", function () {
 
-        document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("dark-mode");
 
-        if (document.body.classList.contains("dark-mode")) {
+    if (document.body.classList.contains("dark-mode")) {
 
-            themeButton.textContent = "☀️";
+        themeButton.textContent = "☀️";
 
-        } else {
+    } else {
 
-            themeButton.textContent = "🌙";
+        themeButton.textContent = "🌙";
 
-        }
+    }
 
-    });
+});
+```
 
 }
 
-
 /* =========================
-   💛 SECRET SISTER SURPRISE
+💛 SECRET SISTER SURPRISE
 ========================= */
 
 const secretTrigger = document.getElementById("secret-trigger");
@@ -261,36 +261,38 @@ let secretClicks = 0;
 
 if (secretTrigger && sisterSecret) {
 
-    secretTrigger.addEventListener("click", function () {
+```
+secretTrigger.addEventListener("click", function () {
 
-        secretClicks++;
+    secretClicks++;
 
-        console.log("Secret clicks:", secretClicks);
+    console.log("Secret clicks:", secretClicks);
 
-        if (secretClicks >= 16) {
+    if (secretClicks >= 16) {
 
-            document.body.classList.add("sister-mode");
+        document.body.classList.add("sister-mode");
 
-            sisterSecret.classList.add("show");
+        sisterSecret.classList.add("show");
 
-            secretClicks = 0;
+        secretClicks = 0;
 
-        }
+    }
 
-    });
+});
+```
 
 }
-
 
 if (closeSecret && sisterSecret) {
 
-    closeSecret.addEventListener("click", function () {
+```
+closeSecret.addEventListener("click", function () {
 
-        sisterSecret.classList.remove("show");
+    sisterSecret.classList.remove("show");
 
-        document.body.classList.remove("sister-mode");
+    document.body.classList.remove("sister-mode");
 
-    });
+});
+```
 
 }
-```
