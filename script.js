@@ -88,15 +88,20 @@ galleryImages.forEach(function (image) {
 
 });
 
-
+```javascript
 /* =========================
    🎵 MUSIC PLAYER
 ========================= */
 
 const music = document.getElementById("background-music");
 const musicButton = document.getElementById("music-toggle");
+const musicBack = document.getElementById("music-back");
+const musicForward = document.getElementById("music-forward");
+const musicProgress = document.getElementById("music-progress");
 
 if (music && musicButton) {
+
+    /* PLAY / PAUSE */
 
     musicButton.addEventListener("click", function () {
 
@@ -104,22 +109,94 @@ if (music && musicButton) {
 
             music.play()
                 .then(function () {
+
                     musicButton.textContent = "❚❚";
+
                 })
                 .catch(function (error) {
+
                     console.log("Music could not be played:", error);
+
                 });
 
         } else {
 
             music.pause();
+
             musicButton.textContent = "▶";
 
         }
 
     });
 
+
+    /* BACK 10 SECONDS */
+
+    if (musicBack) {
+
+        musicBack.addEventListener("click", function () {
+
+            music.currentTime = Math.max(
+                0,
+                music.currentTime - 10
+            );
+
+        });
+
+    }
+
+
+    /* FORWARD 10 SECONDS */
+
+    if (musicForward) {
+
+        musicForward.addEventListener("click", function () {
+
+            music.currentTime = Math.min(
+                music.duration,
+                music.currentTime + 10
+            );
+
+        });
+
+    }
+
+
+    /* UPDATE PROGRESS BAR */
+
+    music.addEventListener("timeupdate", function () {
+
+        if (music.duration) {
+
+            musicProgress.value =
+                (music.currentTime / music.duration) * 100;
+
+        }
+
+    });
+
+
+    /* CLICK PROGRESS BAR */
+
+    if (musicProgress) {
+
+        musicProgress.addEventListener("input", function () {
+
+            if (music.duration) {
+
+                music.currentTime =
+                    (musicProgress.value / 100) * music.duration;
+
+            }
+
+        });
+
+    }
+
 }
+```
+
+
 
 
 /* =========================
