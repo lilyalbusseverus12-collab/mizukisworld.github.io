@@ -24,7 +24,7 @@ const sections = document.querySelectorAll(".section");
 
 if ("IntersectionObserver" in window) {
 
-```
+
 const observer = new IntersectionObserver(
     function (entries) {
 
@@ -51,17 +51,16 @@ sections.forEach(function (section) {
     observer.observe(section);
 
 });
-```
+
 
 } else {
 
-```
+
 sections.forEach(function (section) {
 
     section.classList.add("show");
 
 });
-```
 
 }
 
@@ -73,7 +72,7 @@ const galleryImages = document.querySelectorAll(".gallery img");
 
 galleryImages.forEach(function (image) {
 
-```
+ 
 image.addEventListener("click", function () {
 
     const lightbox = document.createElement("div");
@@ -112,7 +111,7 @@ image.addEventListener("click", function () {
     });
 
 });
-```
+ 
 
 });
 
@@ -125,7 +124,7 @@ const musicButton = document.getElementById("music-toggle");
 
 if (music && musicButton) {
 
-```
+ 
 musicButton.addEventListener("click", function () {
 
     if (music.paused) {
@@ -165,7 +164,7 @@ music.addEventListener("pause", function () {
     musicButton.textContent = "▶";
 
 });
-```
+ 
 
 }
 
@@ -185,7 +184,7 @@ const decorations = [
 
 function createDecoration() {
 
-```
+ 
 const decoration = document.createElement("div");
 
 decoration.className = "floating-decoration";
@@ -211,7 +210,7 @@ setTimeout(function () {
     decoration.remove();
 
 }, 14000);
-```
+ 
 
 }
 
@@ -225,7 +224,7 @@ const themeButton = document.getElementById("theme-toggle");
 
 if (themeButton) {
 
-```
+ 
 themeButton.addEventListener("click", function () {
 
     document.body.classList.toggle("dark-mode");
@@ -241,7 +240,7 @@ themeButton.addEventListener("click", function () {
     }
 
 });
-```
+ 
 
 }
 
@@ -257,7 +256,7 @@ let secretClicks = 0;
 
 if (secretTrigger && sisterSecret) {
 
-```
+ 
 secretTrigger.addEventListener("click", function () {
 
     secretClicks++;
@@ -275,13 +274,13 @@ secretTrigger.addEventListener("click", function () {
     }
 
 });
-```
+ 
 
 }
 
 if (closeSecret && sisterSecret) {
 
-```
+ 
 closeSecret.addEventListener("click", function () {
 
     sisterSecret.classList.remove("show");
@@ -289,6 +288,6 @@ closeSecret.addEventListener("click", function () {
     document.body.classList.remove("sister-mode");
 
 });
-```
+ 
 
 }
