@@ -1,3 +1,4 @@
+```javascript
 /* =========================
    🌸 LOADING SCREEN
 ========================= */
@@ -88,29 +89,34 @@ galleryImages.forEach(function (image) {
 
 });
 
-```javascript
+
 /* =========================
    🎵 MUSIC PLAYER
 ========================= */
 
 const music = document.getElementById("background-music");
 const musicButton = document.getElementById("music-toggle");
+const musicProgress = document.getElementById("music-progress");
 
 if (music && musicButton) {
+
+    /* PLAY / PAUSE */
 
     musicButton.addEventListener("click", function () {
 
         if (music.paused) {
 
-            music.play().then(function () {
+            music.play()
+                .then(function () {
 
-                musicButton.textContent = "❚❚";
+                    musicButton.textContent = "❚❚";
 
-            }).catch(function (error) {
+                })
+                .catch(function (error) {
 
-                console.log("MUSIC ERROR:", error);
+                    console.log("MUSIC ERROR:", error);
 
-            });
+                });
 
         } else {
 
@@ -122,25 +128,38 @@ if (music && musicButton) {
 
     });
 
-}
 
-    /* UPDATE PROGRESS BAR */
+    /* WHEN MUSIC STARTS */
 
-    music.addEventListener("timeupdate", function () {
-
-        if (music.duration) {
-
-            musicProgress.value =
-                (music.currentTime / music.duration) * 100;
-
-        }
-
+    music.addEventListener("play", function () {
+        musicButton.textContent = "❚❚";
     });
 
 
-    /* CLICK PROGRESS BAR */
+    /* WHEN MUSIC PAUSES */
+
+    music.addEventListener("pause", function () {
+        musicButton.textContent = "▶";
+    });
+
+
+    /* UPDATE PROGRESS BAR */
 
     if (musicProgress) {
+
+        music.addEventListener("timeupdate", function () {
+
+            if (music.duration) {
+
+                musicProgress.value =
+                    (music.currentTime / music.duration) * 100;
+
+            }
+
+        });
+
+
+        /* CLICK PROGRESS BAR */
 
         musicProgress.addEventListener("input", function () {
 
@@ -156,9 +175,6 @@ if (music && musicButton) {
     }
 
 }
-```
-
-
 
 
 /* =========================
@@ -205,6 +221,7 @@ function createDecoration() {
 
 setInterval(createDecoration, 700);
 
+
 /* =========================
    🌙 DARK MODE
 ========================= */
@@ -230,6 +247,7 @@ if (themeButton) {
     });
 
 }
+
 
 /* =========================
    💛 SECRET SISTER SURPRISE
@@ -275,3 +293,4 @@ if (closeSecret && sisterSecret) {
     });
 
 }
+```
