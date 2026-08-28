@@ -191,3 +191,48 @@ if (themeButton) {
     });
 
 }
+
+/* =========================
+   💛 SECRET SISTER SURPRISE
+========================= */
+
+const secretTrigger = document.getElementById("secret-trigger");
+const sisterSecret = document.getElementById("sister-secret");
+const closeSecret = document.getElementById("close-secret");
+
+let secretClicks = 0;
+
+if (secretTrigger && sisterSecret) {
+
+    secretTrigger.addEventListener("click", function () {
+
+        secretClicks++;
+
+        console.log("Secret clicks:", secretClicks);
+
+        if (secretClicks >= 16) {
+
+            document.body.classList.add("sister-mode");
+
+            sisterSecret.classList.add("show");
+
+            secretClicks = 0;
+
+        }
+
+    });
+
+}
+
+
+if (closeSecret && sisterSecret) {
+
+    closeSecret.addEventListener("click", function () {
+
+        sisterSecret.classList.remove("show");
+
+        document.body.classList.remove("sister-mode");
+
+    });
+
+}
