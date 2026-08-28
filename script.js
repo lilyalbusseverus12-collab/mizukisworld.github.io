@@ -1,22 +1,18 @@
 /* =========================
-🌸 LOADING SCREEN
+   🌸 LOADING SCREEN
 ========================= */
 
 window.addEventListener("load", function () {
 
-```
-const loadingScreen = document.getElementById("loading-screen");
+    const loadingScreen = document.getElementById("loading-screen");
 
-if (loadingScreen) {
+    if (loadingScreen) {
 
-    setTimeout(function () {
+        setTimeout(function () {
+            loadingScreen.classList.add("hide");
+        }, 800);
 
-        loadingScreen.classList.add("hide");
-
-    }, 800);
-
-}
-```
+    }
 
 });
 
